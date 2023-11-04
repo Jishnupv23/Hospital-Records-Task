@@ -50,43 +50,43 @@ class PatientRecordsSerializer(serializers.ModelSerializer):
         fields = ("Record_id","Created_date", "Department_Name", "Doctor_Name", "Patient_Name")
 
 
-# User = get_user_model()
+User = get_user_model()
 
-# class UserLoginSerializer(serializers.Serializer):
-#     username = serializers.CharField()
-#     password = serializers.CharField(write_only=True, style={'input_type': 'password'})
+class UserLoginSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField(write_only=True, style={'input_type': 'password'})
 
-#     def validate(self, data):
-#         user = User.objects.filter(username=data['username']).first()
-#         if user and user.check_password(data['password']):
-#             token, created = Token.objects.get_or_create(user=user)
-#             data['token'] = token.key
-#             return data
-#         raise serializers.ValidationError('Invalid username or password')
+    def validate(self, data):
+        user = User.objects.filter(username=data['username']).first()
+        if user and user.check_password(data['password']):
+            token, created = Token.objects.get_or_create(user=user)
+            data['token'] = token.key
+            return data
+        raise serializers.ValidationError('Invalid username or password')
 
 
 
-# class UserRegistrationSerializer(serializers.ModelSerializer):
-#     password = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
+class UserRegistrationSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
 
-#     class Meta:
-#         model = User
-#         fields = ('username', 'email', 'password', 'first_name', 'last_name')
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password', 'first_name', 'last_name')
 
-#     def create(self, validated_data):
-#         user = User.objects.create_user(
-#             username=validated_data['username'],
-#             email=validated_data['email'],
-#             password=validated_data['password'],
-#             first_name=validated_data['first_name'],
-#             last_name=validated_data['last_name']
-#         )
-#         return user
+    def create(self, validated_data):
+        user = User.objects.create_user(
+            username=validated_data['username'],
+            email=validated_data['email'],
+            password=validated_data['password'],
+            first_name=validated_data['first_name'],
+            last_name=validated_data['last_name']
+        )
+        return user
     
-# class UserLoginSerializer(serializers.Serializer):
-#     username = serializers.CharField()
-#     password = serializers.CharField(write_only=True)
+class UserLoginSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField(write_only=True)
     
 
-# class DeleteTokenSerializer(serializers.Serializer):
-#     pass
+class DeleteTokenSerializer(serializers.Serializer):
+    pass
