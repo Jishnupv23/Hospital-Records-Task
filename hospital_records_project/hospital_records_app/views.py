@@ -120,24 +120,24 @@ class PatientRecordsView(APIView):
         else:  
             return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)  
 #to get access token
-class UserLoginView(APIView):
-    def post(self, request, *args, **kwargs):
-        serializer = UserLoginSerializer(data=request.data)
-        if serializer.is_valid():
-            username = serializer.validated_data['username']
-            password = serializer.validated_data['password']
-            #return Response(serializer.validated_data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED)
+# class UserLoginView(APIView):
+#     def post(self, request, *args, **kwargs):
+#         serializer = UserLoginSerializer(data=request.data)
+#         if serializer.is_valid():
+#             username = serializer.validated_data['username']
+#             password = serializer.validated_data['password']
+#             #return Response(serializer.validated_data, status=status.HTTP_200_OK)
+#         return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED)
 
 
 #to create newuser
-class UserRegistrationView(generics.CreateAPIView):
-    serializer_class = UserRegistrationSerializer
+# class UserRegistrationView(generics.CreateAPIView):
+#     serializer_class = UserRegistrationSerializer
 
-# to delete the user's authentication token
-class DeleteTokenView(APIView):
-    def post(self, request):
-        request.auth.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+ # to delete the user's authentication token
+# class DeleteTokenView(APIView):
+#     def post(self, request):
+#         request.auth.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
         
             
